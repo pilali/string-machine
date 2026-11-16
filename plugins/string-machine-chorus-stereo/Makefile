@@ -44,8 +44,14 @@ BUILD_CXX_FLAGS += \
 # --------------------------------------------------------------
 # Enable all possible plugin types
 
+ifeq ($(MOD_BUILD),true)
+# MOD headless build: a single plainly-named LV2 binary (see mod/README.md)
+BUILD_CXX_FLAGS += $(MOD_CPU_FLAGS)
+TARGETS += lv2
+else
 TARGETS += lv2_dsp
 TARGETS += vst
+endif
 
 all: $(TARGETS)
 

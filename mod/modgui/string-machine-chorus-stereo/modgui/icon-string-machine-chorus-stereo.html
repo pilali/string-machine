@@ -1,0 +1,107 @@
+<div class="mod-pedal sm-panel sm-chorus string-machine-chorus{{{cns}}}">
+    <div mod-role="drag-handle" class="mod-drag-handle"></div>
+
+    <div class="sm-titlebar">
+        <div class="sm-bypass" mod-role="bypass" title="Enable / Disable">
+            <div class="sm-led sm-bypass-light" mod-role="bypass-light"></div>
+            <span>ON</span>
+        </div>
+        <div class="sm-title">SOLINA CHORUS</div>
+        <div class="sm-subtitle">stereo</div>
+    </div>
+
+    <div class="sm-row">
+        <div class="sm-group sm-g-cho">
+            <div class="sm-group-title">STRING MACHINE CHORUS</div>
+            <div class="sm-group-body sm-col">
+                <div class="sm-switches">
+                    <div class="sm-switch-cell">
+                        <div class="sm-toggle" mod-role="input-control-port" mod-widget="switch" mod-port-symbol="cho_model"></div>
+                        <div class="sm-label">Analog mode</div>
+                    </div>
+                </div>
+                <div class="sm-lfo-row">
+                    <div class="sm-cell">
+                        <div class="sm-label">Rate 1</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_rate1"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_rate1"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Depth 1</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_depth1"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_depth1"></div>
+                    </div>
+                </div>
+                <div class="sm-lfo-row">
+                    <div class="sm-cell">
+                        <div class="sm-label">Rate 2</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_rate2"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_rate2"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Depth 2</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_depth2"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_depth2"></div>
+                    </div>
+                </div>
+                <div class="sm-slider-cell">
+                    <div class="sm-label">Depth</div>
+                    <div class="sm-slider" mod-role="input-control-port" mod-port-symbol="cho_depth"></div>
+                    <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_depth"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-group sm-g-mix">
+            <div class="sm-group-title">MIX</div>
+            <div class="sm-group-body sm-col">
+                    <div class="sm-cell">
+                        <div class="sm-label">Wet</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="wet_gain"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="wet_gain"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Dry</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="dry_gain"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="dry_gain"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Jacks (positioned by mod-ui) ===== -->
+    <div class="mod-pedal-input">
+        {{#effect.ports.audio.input}}
+        <div class="mod-input mod-input-disconnected" title="{{name}}" mod-role="input-audio-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-input-image"></div>
+        </div>
+        {{/effect.ports.audio.input}}
+        {{#effect.ports.midi.input}}
+        <div class="mod-input mod-input-disconnected" title="{{name}}" mod-role="input-midi-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-input-image"></div>
+        </div>
+        {{/effect.ports.midi.input}}
+        {{#effect.ports.cv.input}}
+        <div class="mod-input mod-input-disconnected" title="{{name}}" mod-role="input-cv-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-input-image"></div>
+        </div>
+        {{/effect.ports.cv.input}}
+    </div>
+    <div class="mod-pedal-output">
+        {{#effect.ports.audio.output}}
+        <div class="mod-output mod-output-disconnected" title="{{name}}" mod-role="output-audio-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-output-image"></div>
+        </div>
+        {{/effect.ports.audio.output}}
+        {{#effect.ports.midi.output}}
+        <div class="mod-output mod-output-disconnected" title="{{name}}" mod-role="output-midi-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-output-image"></div>
+        </div>
+        {{/effect.ports.midi.output}}
+        {{#effect.ports.cv.output}}
+        <div class="mod-output mod-output-disconnected" title="{{name}}" mod-role="output-cv-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-output-image"></div>
+        </div>
+        {{/effect.ports.cv.output}}
+    </div>
+</div>

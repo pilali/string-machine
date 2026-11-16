@@ -1,0 +1,243 @@
+/*
+ * String machine -- shared MOD modgui skin
+ * ----------------------------------------
+ * Concatenated in front of each plugin's own stylesheet when the MOD bundles
+ * are assembled (see the `mod` target of the top-level Makefile).
+ *
+ * The widget images are the desktop UI skins of String machine, converted to
+ * horizontal filmstrips at 2x by mod/tools/make-skins.py:
+ *   knob.png           31 frames of  60x60
+ *   slider.png         31 frames of 200x50
+ *   vu.png             31 frames of 190x22
+ *   led.png             2 frames of  18x18   (off, on)
+ *   toggle-button.png   2 frames of  70x30   (off, on)
+ *
+ * Every selector is scoped with .sm-panel{{{cns}}} so that several plugins
+ * using this skin can live on the same pedalboard.
+ */
+
+@font-face {
+    font-family: "StringMachineProggy";
+    src: url(/resources/fonts/ProggySquare.ttf{{{ns}}}) format("truetype");
+}
+
+.sm-panel{{{cns}}} {
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 16px 16px 16px;
+    background: #bdbcb5;
+    border: 2px solid #1d1d1c;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px #e2e1db, 0 6px 18px rgba(0, 0, 0, 0.55);
+    font-family: "StringMachineProggy", monospace;
+    color: #000;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    user-select: none;
+}
+
+.sm-panel{{{cns}}} * {
+    box-sizing: border-box;
+}
+
+/* ---- title bar ------------------------------------------------------- */
+
+.sm-panel{{{cns}}} .sm-titlebar {
+    position: relative;
+    height: 52px;
+    margin: 0 -16px 12px -16px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    background: #2e3435;
+    border-bottom: 2px solid #1d1d1c;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+}
+
+.sm-panel{{{cns}}} .sm-title {
+    white-space: nowrap;
+    font-size: 33px;
+    letter-spacing: 3px;
+    color: #ff7e00;
+    margin-left: 18px;
+}
+
+.sm-panel{{{cns}}} .sm-subtitle {
+    margin-left: auto;
+    white-space: nowrap;
+    font-size: 22px;
+    color: #bdbcb5;
+}
+
+.sm-panel{{{cns}}} .sm-bypass {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    background: #585856;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ---- rows and groups -------------------------------------------------- */
+
+.sm-panel{{{cns}}} .sm-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.sm-panel{{{cns}}} .sm-row:last-of-type {
+    margin-bottom: 0;
+}
+
+.sm-panel{{{cns}}} .sm-group {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+    border-radius: 2px;
+}
+
+.sm-panel{{{cns}}} .sm-group-title {
+    height: 24px;
+    line-height: 26px;
+    background: #585856;
+    color: #fff;
+    text-align: center;
+    font-size: 22px;
+    border-bottom: 1px solid #000;
+}
+
+.sm-panel{{{cns}}} .sm-group-body {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 4px 4px;
+}
+
+.sm-panel{{{cns}}} .sm-col {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sm-panel{{{cns}}} .sm-sub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sm-panel{{{cns}}} .sm-sub-title {
+    width: 100%;
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 22px;
+    border-bottom: 1px solid #000;
+}
+
+/* ---- control cells ---------------------------------------------------- */
+
+.sm-panel{{{cns}}} .sm-cell {
+    width: 96px;
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sm-panel{{{cns}}} .sm-label {
+    height: 22px;
+    line-height: 22px;
+    font-size: 22px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.sm-panel{{{cns}}} .sm-knob {
+    width: 60px;
+    height: 60px;
+    margin: 2px 0 4px 0;
+    background-image: url(/resources/images/knob.png{{{ns}}});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.sm-panel{{{cns}}} .sm-slider {
+    width: 200px;
+    height: 50px;
+    background-image: url(/resources/images/slider.png{{{ns}}});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.sm-panel{{{cns}}} .sm-value {
+    width: 96px;
+    height: 24px;
+    line-height: 24px;
+    background-image: url(/resources/images/value-display.png{{{ns}}});
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 22px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* on/off switches (mod-widget="switch": mod-ui toggles .on / .off) */
+.sm-panel{{{cns}}} .sm-toggle {
+    width: 70px;
+    height: 30px;
+    background-image: url(/resources/images/toggle-button.png{{{ns}}});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.sm-panel{{{cns}}} .sm-toggle.on {
+    background-position: -70px 0;
+}
+
+/* LEDs: bypass light (mod-ui toggles .on/.off) and LFO lights (script) */
+.sm-panel{{{cns}}} .sm-led {
+    width: 18px;
+    height: 18px;
+    background-image: url(/resources/images/led.png{{{ns}}});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.sm-panel{{{cns}}} .sm-led.on {
+    background-position: -18px 0;
+}
+
+/* VU meters, driven by the monitored output ports (script) */
+.sm-panel{{{cns}}} .sm-vu {
+    width: 190px;
+    height: 22px;
+    background-image: url(/resources/images/vu.png{{{ns}}});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.sm-panel{{{cns}}} .sm-switch-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+/* ---- jacks (mod-ui places them outside the panel) ---------------------- */
+
+.sm-panel{{{cns}}} .mod-pedal-input,
+.sm-panel{{{cns}}} .mod-pedal-output {
+    top: 70px;
+}

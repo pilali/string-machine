@@ -36,6 +36,13 @@ This release breaks backwards compatibility.
 
 - initial release
 
+## MOD Audio
+
+The plugins run on MOD Dwarf, MOD Duo X and mod-audio on a Raspberry Pi, with
+a web GUI (modgui). `make mod` builds headless bundles in `bin/mod/`, and
+`mod/mod-plugin-builder/` holds the mod-plugin-builder package.
+See [mod/README.md](mod/README.md).
+
 ## Build instructions
 
 1. Obtain prerequisites

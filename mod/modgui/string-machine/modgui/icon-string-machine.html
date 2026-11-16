@@ -1,0 +1,284 @@
+<div class="mod-pedal sm-panel string-machine{{{cns}}}">
+    <div mod-role="drag-handle" class="mod-drag-handle"></div>
+
+    <!-- ===== Title bar ===== -->
+    <div class="sm-titlebar">
+        <div class="sm-bypass" mod-role="bypass" title="Enable / Disable">
+            <div class="sm-led sm-bypass-light" mod-role="bypass-light"></div>
+            <span>ON</span>
+        </div>
+        <div class="sm-title">STRING MACHINE</div>
+        <div class="sm-subtitle">string ensemble synthesizer &middot; jpcima</div>
+    </div>
+
+    <!-- ===== Row 1: oscillators, PWM, filters, mixer, level ===== -->
+    <div class="sm-row">
+
+        <div class="sm-group sm-g-osc">
+            <div class="sm-group-title">STRING OSC</div>
+            <div class="sm-group-body">
+                <div class="sm-sub">
+                    <div class="sm-sub-title">AUTO DETUNE</div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Detune</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_detune"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_detune"></div>
+                    </div>
+                    <div class="sm-cell sm-readouts">
+                        <div class="sm-readout-row">
+                            <span class="sm-label">4'</span>
+                            <div class="sm-value" data-sm-out="osc_current_detune_upper">0.00</div>
+                        </div>
+                        <div class="sm-readout-row">
+                            <span class="sm-label">8'</span>
+                            <div class="sm-value" data-sm-out="osc_current_detune_lower">0.00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sm-sub">
+                    <div class="sm-sub-title">SHAPE</div>
+                    <div class="sm-cell">
+                        <div class="sm-label">4' HP</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_hp_cutoff_upper"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_hp_cutoff_upper"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">8' HP</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_hp_cutoff_lower"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_hp_cutoff_lower"></div>
+                    </div>
+                </div>
+                <div class="sm-sub">
+                    <div class="sm-sub-title">ENHANCE</div>
+                    <div class="sm-cell">
+                        <div class="sm-label">4' Clip Bias</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_enhance_upper"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_enhance_upper"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">8' Clip Bias</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_enhance_lower"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_enhance_lower"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-group sm-g-pwm">
+            <div class="sm-group-title">STRING PWM</div>
+            <div class="sm-group-body sm-col">
+                <div class="sm-cell">
+                    <div class="sm-label">Depth</div>
+                    <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_pwm_depth"></div>
+                    <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_pwm_depth"></div>
+                </div>
+                <div class="sm-cell">
+                    <div class="sm-label">Frequency</div>
+                    <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="osc_pwm_frequency"></div>
+                    <div class="sm-value" mod-role="input-control-value" mod-port-symbol="osc_pwm_frequency"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-group sm-g-flt">
+            <div class="sm-group-title">STRING FILTERS</div>
+            <div class="sm-group-body">
+                <div class="sm-sub">
+                    <div class="sm-cell">
+                        <div class="sm-label">4' LP</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="flt_lp_cutoff_upper"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="flt_lp_cutoff_upper"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">8' LP</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="flt_lp_cutoff_lower"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="flt_lp_cutoff_lower"></div>
+                    </div>
+                </div>
+                <div class="sm-sub">
+                    <div class="sm-cell">
+                        <div class="sm-label">4' HP</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="flt_hp_cutoff_upper"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="flt_hp_cutoff_upper"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">8' HP</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="flt_hp_cutoff_lower"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="flt_hp_cutoff_lower"></div>
+                    </div>
+                </div>
+                <div class="sm-sub">
+                    <div class="sm-cell">
+                        <div class="sm-label">4' EQ</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="flt_hs_cutoff_eq"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="flt_hs_cutoff_eq"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">4' Boost</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="flt_hs_boost_eq"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="flt_hs_boost_eq"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-group sm-g-mix">
+            <div class="sm-group-title">MIXER</div>
+            <div class="sm-group-body sm-col">
+                <div class="sm-cell">
+                    <div class="sm-label">Vol 4'</div>
+                    <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="mix_gain_upper"></div>
+                    <div class="sm-value" mod-role="input-control-value" mod-port-symbol="mix_gain_upper"></div>
+                </div>
+                <div class="sm-cell">
+                    <div class="sm-label">Vol 8'</div>
+                    <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="mix_gain_lower"></div>
+                    <div class="sm-value" mod-role="input-control-value" mod-port-symbol="mix_gain_lower"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-group sm-g-level">
+            <div class="sm-group-title">LEVEL</div>
+            <div class="sm-group-body sm-col">
+                <div class="sm-level-top">
+                    <div class="sm-cell">
+                        <div class="sm-label">Output</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="master_gain"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="master_gain"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Polyphony</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="polyphony"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="polyphony"></div>
+                    </div>
+                </div>
+                <div class="sm-vus">
+                    <div class="sm-vu-row"><span class="sm-label">L</span><div class="sm-vu" data-sm-out="master_current_level1"></div></div>
+                    <div class="sm-vu-row"><span class="sm-label">R</span><div class="sm-vu" data-sm-out="master_current_level2"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Row 2: chorus, envelope ===== -->
+    <div class="sm-row">
+
+        <div class="sm-group sm-g-cho">
+            <div class="sm-group-title">SOLINA CHORUS</div>
+            <div class="sm-group-body sm-col">
+                <div class="sm-switches">
+                    <div class="sm-switch-cell">
+                        <div class="sm-toggle" mod-role="input-control-port" mod-widget="switch" mod-port-symbol="cho_enabled"></div>
+                        <div class="sm-label">On/Off</div>
+                    </div>
+                    <div class="sm-switch-cell">
+                        <div class="sm-toggle" mod-role="input-control-port" mod-widget="switch" mod-port-symbol="cho_model"></div>
+                        <div class="sm-label">Analog mode</div>
+                    </div>
+                    <div class="sm-slider-cell">
+                        <div class="sm-label">Depth</div>
+                        <div class="sm-slider" mod-role="input-control-port" mod-port-symbol="cho_depth"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_depth"></div>
+                    </div>
+                </div>
+                <div class="sm-lfo-row">
+                    <div class="sm-cell">
+                        <div class="sm-label">Rate 1</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_rate1"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_rate1"></div>
+                    </div>
+                    <div class="sm-lfo-led"><div class="sm-led" data-sm-out="cho_current_phase1"></div><span class="sm-label">LFO 1</span></div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Depth 1</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_depth1"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_depth1"></div>
+                    </div>
+                </div>
+                <div class="sm-lfo-row">
+                    <div class="sm-cell">
+                        <div class="sm-label">Rate 2</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_rate2"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_rate2"></div>
+                    </div>
+                    <div class="sm-lfo-led"><div class="sm-led" data-sm-out="cho_current_phase2"></div><span class="sm-label">LFO 2</span></div>
+                    <div class="sm-cell">
+                        <div class="sm-label">Depth 2</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="cho_depth2"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="cho_depth2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-group sm-g-env">
+            <div class="sm-group-title">AHDSR ENVELOPE</div>
+            <div class="sm-group-body sm-col">
+                <div class="sm-env-knobs">
+                    <div class="sm-cell">
+                        <div class="sm-label">A</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="env_attack"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="env_attack"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">H</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="env_hold"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="env_hold"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">D</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="env_decay"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="env_decay"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">S</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="env_sustain"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="env_sustain"></div>
+                    </div>
+                    <div class="sm-cell">
+                        <div class="sm-label">R</div>
+                        <div class="sm-knob" mod-role="input-control-port" mod-port-symbol="env_release"></div>
+                        <div class="sm-value" mod-role="input-control-value" mod-port-symbol="env_release"></div>
+                    </div>
+                </div>
+                <canvas class="sm-env-plot" width="1200" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Jacks (positioned by mod-ui) ===== -->
+    <div class="mod-pedal-input">
+        {{#effect.ports.audio.input}}
+        <div class="mod-input mod-input-disconnected" title="{{name}}" mod-role="input-audio-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-input-image"></div>
+        </div>
+        {{/effect.ports.audio.input}}
+        {{#effect.ports.midi.input}}
+        <div class="mod-input mod-input-disconnected" title="{{name}}" mod-role="input-midi-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-input-image"></div>
+        </div>
+        {{/effect.ports.midi.input}}
+        {{#effect.ports.cv.input}}
+        <div class="mod-input mod-input-disconnected" title="{{name}}" mod-role="input-cv-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-input-image"></div>
+        </div>
+        {{/effect.ports.cv.input}}
+    </div>
+    <div class="mod-pedal-output">
+        {{#effect.ports.audio.output}}
+        <div class="mod-output mod-output-disconnected" title="{{name}}" mod-role="output-audio-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-output-image"></div>
+        </div>
+        {{/effect.ports.audio.output}}
+        {{#effect.ports.midi.output}}
+        <div class="mod-output mod-output-disconnected" title="{{name}}" mod-role="output-midi-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-output-image"></div>
+        </div>
+        {{/effect.ports.midi.output}}
+        {{#effect.ports.cv.output}}
+        <div class="mod-output mod-output-disconnected" title="{{name}}" mod-role="output-cv-port" mod-port-symbol="{{symbol}}">
+            <div class="mod-pedal-output-image"></div>
+        </div>
+        {{/effect.ports.cv.output}}
+    </div>
+</div>

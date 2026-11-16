@@ -1,0 +1,40 @@
+/*
+ * String machine chorus -- panel layout
+ * (appended after mod/modgui/common/skin.css)
+ */
+
+.string-machine-chorus{{{cns}}} {
+    width: 500px;
+}
+
+.string-machine-chorus{{{cns}}} .sm-title {
+    font-size: 30px;
+    margin-left: 14px;
+}
+
+.string-machine-chorus{{{cns}}} .sm-g-cho { flex: 1; }
+.string-machine-chorus{{{cns}}} .sm-g-mix { width: 112px; }
+
+.string-machine-chorus{{{cns}}} .sm-switches {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 2px 0 6px 0;
+}
+
+.string-machine-chorus{{{cns}}} .sm-lfo-row {
+    display: flex;
+    gap: 24px;
+}
+
+.string-machine-chorus{{{cns}}} .sm-g-mix .sm-group-body {
+    padding-top: 66px;
+}
+
+.string-machine-chorus{{{cns}}} .sm-slider-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: 2px;
+}

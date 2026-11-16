@@ -45,7 +45,7 @@ void InitParameter(uint32_t index, Parameter &parameter)
     case pIdChoModel:
         parameter.symbol = "cho_model";
         parameter.name = "Chorus model";
-        parameter.hints = kParameterIsInteger;
+        parameter.hints = kParameterIsAutomatable|kParameterIsInteger;
         parameter.ranges = ParameterRanges(1.0, 0.0, 1.0);
         parameter.enumValues.values = pev = new ParameterEnumerationValue[(parameter.enumValues.count = 2)];
         parameter.enumValues.restrictedMode = true;

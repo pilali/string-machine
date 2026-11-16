@@ -1,0 +1,85 @@
+@prefix lv2:    <http://lv2plug.in/ns/lv2core#> .
+@prefix modgui: <http://moddevices.com/ns/modgui#> .
+
+# MOD web GUI for String machine.
+# Paths are relative to the .lv2 bundle root; the web resources live in
+# modgui/. The stylesheet is assembled at build time from
+# mod/modgui/common/skin.css + mod/modgui/string-machine/modgui/stylesheet-string-machine.css.
+
+<http://jpcima.sdf1.org/lv2/string-machine-mk2>
+    modgui:gui [
+        a modgui:Gui ;
+        modgui:resourcesDirectory <modgui> ;
+        modgui:iconTemplate <modgui/icon-string-machine.html> ;
+        modgui:stylesheet <modgui/stylesheet-string-machine.css> ;
+        modgui:javascript <modgui/script-string-machine.js> ;
+        modgui:screenshot <modgui/screenshot-string-machine.png> ;
+        modgui:thumbnail <modgui/thumbnail-string-machine.png> ;
+        modgui:brand "jpcima" ;
+        modgui:label "String machine" ;
+
+        # Output ports shown by the GUI (LFO lights, VU meters, detune readouts)
+        modgui:monitoredOutputs [ lv2:symbol "osc_current_detune_upper" ] , [ lv2:symbol "osc_current_detune_lower" ] , [ lv2:symbol "cho_current_phase1" ] , [ lv2:symbol "cho_current_phase2" ] , [ lv2:symbol "master_current_level1" ] , [ lv2:symbol "master_current_level2" ] ;
+
+        # Control ports, in lv2:index order. The icon template binds each
+        # widget by lv2:symbol (mod-port-symbol).
+        modgui:port [
+            lv2:index 3 ; lv2:symbol "osc_detune" ; lv2:name "Oscillator detune" ;
+        ] , [
+            lv2:index 4 ; lv2:symbol "osc_hp_cutoff_upper" ; lv2:name "Oscillator HP Cutoff 4'" ;
+        ] , [
+            lv2:index 5 ; lv2:symbol "osc_hp_cutoff_lower" ; lv2:name "Oscillator HP Cutoff 8'" ;
+        ] , [
+            lv2:index 6 ; lv2:symbol "osc_pwm_depth" ; lv2:name "Oscillator PWM Depth" ;
+        ] , [
+            lv2:index 7 ; lv2:symbol "osc_pwm_frequency" ; lv2:name "Oscillator PWM Frequency" ;
+        ] , [
+            lv2:index 8 ; lv2:symbol "osc_enhance_upper" ; lv2:name "Oscillator enhance 4'" ;
+        ] , [
+            lv2:index 9 ; lv2:symbol "osc_enhance_lower" ; lv2:name "Oscillator enhance 8'" ;
+        ] , [
+            lv2:index 10 ; lv2:symbol "flt_lp_cutoff_upper" ; lv2:name "Filters LP Cutoff 4'" ;
+        ] , [
+            lv2:index 11 ; lv2:symbol "flt_hp_cutoff_upper" ; lv2:name "Filters HP Cutoff 4'" ;
+        ] , [
+            lv2:index 12 ; lv2:symbol "flt_lp_cutoff_lower" ; lv2:name "Filters LP Cutoff 8'" ;
+        ] , [
+            lv2:index 13 ; lv2:symbol "flt_hp_cutoff_lower" ; lv2:name "Filters HP Cutoff 8'" ;
+        ] , [
+            lv2:index 14 ; lv2:symbol "flt_hs_cutoff_eq" ; lv2:name "Filters HS Cutoff 4'" ;
+        ] , [
+            lv2:index 15 ; lv2:symbol "flt_hs_boost_eq" ; lv2:name "Filters HS Boost 4'" ;
+        ] , [
+            lv2:index 16 ; lv2:symbol "mix_gain_upper" ; lv2:name "Mix Gain 4'" ;
+        ] , [
+            lv2:index 17 ; lv2:symbol "mix_gain_lower" ; lv2:name "Mix Gain 8'" ;
+        ] , [
+            lv2:index 18 ; lv2:symbol "env_attack" ; lv2:name "Envelope attack" ;
+        ] , [
+            lv2:index 19 ; lv2:symbol "env_hold" ; lv2:name "Envelope hold" ;
+        ] , [
+            lv2:index 20 ; lv2:symbol "env_decay" ; lv2:name "Envelope decay" ;
+        ] , [
+            lv2:index 21 ; lv2:symbol "env_sustain" ; lv2:name "Envelope sustain" ;
+        ] , [
+            lv2:index 22 ; lv2:symbol "env_release" ; lv2:name "Envelope release" ;
+        ] , [
+            lv2:index 23 ; lv2:symbol "cho_enabled" ; lv2:name "Chorus enabled" ;
+        ] , [
+            lv2:index 24 ; lv2:symbol "cho_depth" ; lv2:name "Chorus global depth" ;
+        ] , [
+            lv2:index 25 ; lv2:symbol "cho_rate1" ; lv2:name "Chorus rate 1" ;
+        ] , [
+            lv2:index 26 ; lv2:symbol "cho_depth1" ; lv2:name "Chorus depth 1" ;
+        ] , [
+            lv2:index 27 ; lv2:symbol "cho_rate2" ; lv2:name "Chorus rate 2" ;
+        ] , [
+            lv2:index 28 ; lv2:symbol "cho_depth2" ; lv2:name "Chorus depth 2" ;
+        ] , [
+            lv2:index 29 ; lv2:symbol "cho_model" ; lv2:name "Chorus model" ;
+        ] , [
+            lv2:index 30 ; lv2:symbol "master_gain" ; lv2:name "Master Gain" ;
+        ] , [
+            lv2:index 31 ; lv2:symbol "polyphony" ; lv2:name "Polyphony" ;
+        ] ;
+    ] .

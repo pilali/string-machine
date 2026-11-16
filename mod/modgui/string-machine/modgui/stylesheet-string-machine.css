@@ -1,0 +1,123 @@
+/*
+ * String machine -- synthesizer panel layout
+ * (appended after mod/modgui/common/skin.css)
+ */
+
+.string-machine{{{cns}}} {
+    width: 1240px;
+    height: 738px;
+}
+
+/* row 1 ------------------------------------------------------------------ */
+
+.string-machine{{{cns}}} .sm-g-osc   { width: 392px; }
+.string-machine{{{cns}}} .sm-g-pwm   { width: 112px; }
+.string-machine{{{cns}}} .sm-g-flt   { width: 300px; }
+.string-machine{{{cns}}} .sm-g-mix   { width: 112px; }
+.string-machine{{{cns}}} .sm-g-level { flex: 1; }
+
+/* STRING OSC sub-groups are sized for their (long) labels */
+.string-machine{{{cns}}} .sm-g-osc .sm-sub:nth-child(1) { width: 134px; }
+.string-machine{{{cns}}} .sm-g-osc .sm-sub:nth-child(2) { width: 96px; }
+.string-machine{{{cns}}} .sm-g-osc .sm-sub:nth-child(3) { width: 144px; }
+.string-machine{{{cns}}} .sm-g-osc .sm-cell { width: 100%; }
+
+/* groups without sub-titles start their knobs at the same height as the
+   STRING OSC knobs, which sit under one */
+.string-machine{{{cns}}} .sm-g-flt .sm-sub,
+.string-machine{{{cns}}} .sm-g-pwm .sm-group-body,
+.string-machine{{{cns}}} .sm-g-mix .sm-group-body,
+.string-machine{{{cns}}} .sm-g-level .sm-group-body {
+    padding-top: 27px;
+}
+
+.string-machine{{{cns}}} .sm-readouts {
+    justify-content: center;
+    gap: 8px;
+}
+
+.string-machine{{{cns}}} .sm-readout-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.string-machine{{{cns}}} .sm-readout-row .sm-label {
+    width: 22px;
+}
+
+.string-machine{{{cns}}} .sm-readout-row .sm-value {
+    width: 76px;
+}
+
+.string-machine{{{cns}}} .sm-level-top {
+    display: flex;
+    gap: 16px;
+}
+
+.string-machine{{{cns}}} .sm-vus {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.string-machine{{{cns}}} .sm-vu-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* row 2 ------------------------------------------------------------------ */
+
+.string-machine{{{cns}}} .sm-g-cho { width: 400px; }
+.string-machine{{{cns}}} .sm-g-env { flex: 1; }
+
+.string-machine{{{cns}}} .sm-switches {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin: 2px 0 6px 0;
+}
+
+.string-machine{{{cns}}} .sm-switch-cell {
+    padding-top: 14px;
+}
+
+.string-machine{{{cns}}} .sm-slider-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.string-machine{{{cns}}} .sm-lfo-row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.string-machine{{{cns}}} .sm-lfo-led {
+    width: 70px;
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.string-machine{{{cns}}} .sm-env-knobs {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.string-machine{{{cns}}} .sm-env-plot {
+    width: 100%;
+    flex: 1 1 0;
+    min-height: 120px;
+    margin: 6px 0 2px 0;
+    border: 1px solid #000;
+    background: #2e3435;
+}

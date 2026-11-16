@@ -60,6 +60,15 @@ FILES_UI = \
 	$(FILES_SHARED)
 
 # --------------------------------------------------------------
+# MOD headless build (MOD_BUILD=true): DSP only, no native UI and no
+# dependency on Cairo/X11. MOD devices drive the plugin with the HTML
+# modgui shipped from mod/modgui/ (see mod/README.md).
+
+ifeq ($(MOD_BUILD),true)
+FILES_UI =
+endif
+
+# --------------------------------------------------------------
 # Do some magic
 
 UI_TYPE = cairo
@@ -72,8 +81,13 @@ BUILD_CXX_FLAGS += \
 # --------------------------------------------------------------
 # Enable all possible plugin types
 
+ifeq ($(MOD_BUILD),true)
+BUILD_CXX_FLAGS += -DDISTRHO_PLUGIN_HAS_UI=0 $(MOD_CPU_FLAGS)
+TARGETS += lv2
+else
 TARGETS += lv2_sep
 TARGETS += vst
+endif
 
 all: $(TARGETS)
 
@@ -96,15 +110,14 @@ StringMachineUILayouts.%.inc: layouts/%.fl $(LAYOUT_TOOL)
 
 # --------------------------------------------------------------
 
-presets: StringMachinePresets.inc
-.PHONY: presets
-
+# StringMachinePresets.inc is generated from presets/*.json and committed.
+# It is only regenerated on demand (`make presets`): a normal build must not
+# run the presets tool, which cannot execute when cross-compiling.
 PRESETS_TOOL := ../../tools/presets/bin/presets$(APP_EXT)
-$(PRESETS_TOOL):
-	$(MAKE) -C ../../tools/presets
 
-StringMachinePresets.inc: $(PRESETS_TOOL)
-	$(PRESETS_TOOL) ../../presets/string-machine/*.json > $@
-.PHONY: StringMachinePresets.inc
+presets:
+	$(MAKE) -C ../../tools/presets
+	$(PRESETS_TOOL) ../../presets/string-machine/*.json > StringMachinePresets.inc
+.PHONY: presets
 
 # --------------------------------------------------------------

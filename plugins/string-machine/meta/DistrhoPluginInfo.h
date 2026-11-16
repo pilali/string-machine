@@ -13,8 +13,12 @@
 #define DISTRHO_PLUGIN_NUM_INPUTS      0
 #define DISTRHO_PLUGIN_NUM_OUTPUTS     2
 #define DISTRHO_PLUGIN_IS_SYNTH        1
+// The UI can be disabled from the build (-DDISTRHO_PLUGIN_HAS_UI=0), which is
+// what the MOD headless build does: MOD devices use the HTML modgui instead.
+#ifndef DISTRHO_PLUGIN_HAS_UI
 #define DISTRHO_PLUGIN_HAS_UI          1
-#define DISTRHO_PLUGIN_HAS_EMBED_UI    1
+#endif
+#define DISTRHO_PLUGIN_HAS_EMBED_UI    DISTRHO_PLUGIN_HAS_UI
 #define DISTRHO_PLUGIN_HAS_EXTERNAL_UI 0
 #define DISTRHO_PLUGIN_IS_RT_SAFE      1
 #define DISTRHO_PLUGIN_WANT_PROGRAMS   1
