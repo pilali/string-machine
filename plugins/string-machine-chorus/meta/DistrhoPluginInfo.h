@@ -6,6 +6,7 @@
 #define DISTRHO_PLUGIN_HOMEPAGE        "https://github.com/jpcima/string-machine"
 #define DISTRHO_PLUGIN_BRAND_ID        Jpci
 #define DISTRHO_PLUGIN_UNIQUE_ID       Strc
+#define DISTRHO_PLUGIN_CLAP_ID         "org.sdf1.jpcima.string-machine-chorus"
 #define DISTRHO_PLUGIN_VERSION         0,0,0
 #define DISTRHO_PLUGIN_LABEL           "String machine chorus"
 #define DISTRHO_PLUGIN_LICENSE         "http://spdx.org/licenses/GPL-2.0-or-later"

@@ -20,7 +20,7 @@ jobs:
     runs-on: macos-15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
 
@@ -42,8 +42,9 @@ jobs:
         run: |
           # flags are given through the environment so that DPF can still append its own
           ARCH_FLAGS="-arch x86_64 -arch arm64 -mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET}"
-          export CFLAGS="$ARCH_FLAGS"
-          export CXXFLAGS="$ARCH_FLAGS"
+          # sources include <cairo/cairo.h>, so the prefix include dir is needed too
+          export CFLAGS="$ARCH_FLAGS -I$DEPS_PREFIX/include"
+          export CXXFLAGS="$ARCH_FLAGS -I$DEPS_PREFIX/include"
           export LDFLAGS="$ARCH_FLAGS -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework ApplicationServices"
           export PKG_CONFIG="pkg-config --static"
           export PKG_CONFIG_PATH="$DEPS_PREFIX/lib/pkgconfig"

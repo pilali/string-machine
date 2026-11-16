@@ -51,8 +51,9 @@ To build locally on a Mac:
 
 ```
 scripts/build-macos-deps.sh deps/prefix
-export CFLAGS="-arch x86_64 -arch arm64 -mmacosx-version-min=10.15" CXXFLAGS="$CFLAGS"
-export LDFLAGS="$CFLAGS -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework ApplicationServices"
+export ARCH_FLAGS="-arch x86_64 -arch arm64 -mmacosx-version-min=10.15"
+export CFLAGS="$ARCH_FLAGS -I$PWD/deps/prefix/include" CXXFLAGS="$ARCH_FLAGS -I$PWD/deps/prefix/include"
+export LDFLAGS="$ARCH_FLAGS -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework ApplicationServices"
 export PKG_CONFIG="pkg-config --static" PKG_CONFIG_PATH="$PWD/deps/prefix/lib/pkgconfig"
 make NOOPT=true
 ```
