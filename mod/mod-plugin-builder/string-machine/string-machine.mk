@@ -18,7 +18,7 @@
 ######################################
 
 # Pin to a commit of the repository holding the MOD port
-STRING_MACHINE_VERSION = master
+STRING_MACHINE_VERSION = 3e44d5fff112a18a4afeff4ffddb245e2ebaafb8
 STRING_MACHINE_SITE = https://github.com/pilali/string-machine.git
 STRING_MACHINE_SITE_METHOD = git
 STRING_MACHINE_BUNDLES = string-machine.lv2 string-machine-chorus.lv2 string-machine-chorus-stereo.lv2
