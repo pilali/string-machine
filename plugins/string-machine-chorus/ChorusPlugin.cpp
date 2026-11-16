@@ -51,7 +51,7 @@ uint32_t ChorusPlugin::getVersion() const
 
 int64_t ChorusPlugin::getUniqueId() const
 {
-    return d_cconst(DISTRHO_PLUGIN_UNIQUE_ID);
+    return d_cconst(STRINGIFY(DISTRHO_PLUGIN_UNIQUE_ID));
 }
 
 void ChorusPlugin::initParameter(uint32_t index, Parameter &parameter)

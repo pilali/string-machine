@@ -36,6 +36,29 @@ This release breaks backwards compatibility.
 
 - initial release
 
+## macOS (Audio Unit, Universal Binary)
+
+The GitHub Actions workflow `.github/workflows/macos.yml` builds the plugins for macOS as Universal Binaries (Intel `x86_64` + Apple Silicon `arm64`), in AU, VST2 and LV2 formats.
+The resulting `string-machine-macos-universal.zip` is available as a workflow artifact, and is attached to the GitHub release when a `v*` tag is pushed.
+
+| Plugin | AU type | AU subtype | AU manufacturer |
+|---|---|---|---|
+| String machine | `aumu` | `StM2` | `Jpci` |
+| String machine chorus | `aufx` | `Strc` | `Jpci` |
+| String machine stereo chorus | `aufx` | `StrC` | `Jpci` |
+
+To build locally on a Mac:
+
+```
+scripts/build-macos-deps.sh deps/prefix
+export CFLAGS="-arch x86_64 -arch arm64 -mmacosx-version-min=10.15" CXXFLAGS="$CFLAGS"
+export LDFLAGS="$CFLAGS -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework ApplicationServices"
+export PKG_CONFIG="pkg-config --static" PKG_CONFIG_PATH="$PWD/deps/prefix/lib/pkgconfig"
+make NOOPT=true
+```
+
+The binaries are ad-hoc signed but not notarized: after copying them to `~/Library/Audio/Plug-Ins/Components`, you may need to run `xattr -dr com.apple.quarantine` on the bundles.
+
 ## Build instructions
 
 1. Obtain prerequisites

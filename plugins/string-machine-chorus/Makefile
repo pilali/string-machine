@@ -44,6 +44,10 @@ BUILD_CXX_FLAGS += \
 TARGETS += lv2_dsp
 TARGETS += vst
 
+ifeq ($(MACOS),true)
+TARGETS += au
+endif
+
 all: $(TARGETS)
 
 # --------------------------------------------------------------

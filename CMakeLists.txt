@@ -5,7 +5,7 @@ add_subdirectory("dpf")
 
 ###
 dpf_add_plugin(string-machine
-  TARGETS lv2 vst2
+  TARGETS lv2 vst2 au
   UI_TYPE cairo
   FILES_DSP
     "plugins/string-machine/StringMachinePlugin.cpp"
@@ -64,7 +64,7 @@ endif()
 
 ###
 dpf_add_plugin(string-machine-chorus
-  TARGETS lv2 vst2
+  TARGETS lv2 vst2 au
   FILES_DSP
     "plugins/string-machine-chorus/ChorusPlugin.cpp"
   FILES_COMMON
@@ -91,7 +91,7 @@ endif()
 
 ###
 dpf_add_plugin(string-machine-chorus-stereo
-  TARGETS lv2 vst2
+  TARGETS lv2 vst2 au
   FILES_DSP
     "plugins/string-machine-chorus-stereo/StereoChorusPlugin.cpp"
   FILES_COMMON

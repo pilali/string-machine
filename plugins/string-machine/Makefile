@@ -75,6 +75,10 @@ BUILD_CXX_FLAGS += \
 TARGETS += lv2_sep
 TARGETS += vst
 
+ifeq ($(MACOS),true)
+TARGETS += au
+endif
+
 all: $(TARGETS)
 
 RES2C := ../../dpf/utils/res2c.py
@@ -91,8 +95,12 @@ LAYOUT_TOOL := ../../tools/layout-tool/bin/layout-tool$(APP_EXT)
 $(LAYOUT_TOOL):
 	$(MAKE) -C ../../tools/layout-tool
 
+# Only regenerate layouts on explicit request (`make layouts`), so that
+# regular builds do not require the layout tool and its dependencies (boost).
+ifneq ($(filter layouts,$(MAKECMDGOALS)),)
 StringMachineUILayouts.%.inc: layouts/%.fl $(LAYOUT_TOOL)
 	$(LAYOUT_TOOL) $< > $@
+endif
 
 # --------------------------------------------------------------
 

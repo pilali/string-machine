@@ -1,0 +1,142 @@
+name: macOS Universal
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MACOSX_DEPLOYMENT_TARGET: '10.15'
+  DEPS_PREFIX: ${{ github.workspace }}/deps/prefix
+
+jobs:
+  build:
+    name: Build AU / VST2 / LV2 (x86_64 + arm64)
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install build tools
+        run: brew install pkgconf || true
+
+      - name: Restore dependency cache
+        id: deps-cache
+        uses: actions/cache@v4
+        with:
+          path: deps/prefix
+          key: macos-universal-deps-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ hashFiles('scripts/build-macos-deps.sh') }}
+
+      - name: Build dependencies (libpng, pixman, cairo)
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: scripts/build-macos-deps.sh "$DEPS_PREFIX"
+
+      - name: Build plugins
+        run: |
+          # flags are given through the environment so that DPF can still append its own
+          ARCH_FLAGS="-arch x86_64 -arch arm64 -mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET}"
+          export CFLAGS="$ARCH_FLAGS"
+          export CXXFLAGS="$ARCH_FLAGS"
+          export LDFLAGS="$ARCH_FLAGS -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework ApplicationServices"
+          export PKG_CONFIG="pkg-config --static"
+          export PKG_CONFIG_PATH="$DEPS_PREFIX/lib/pkgconfig"
+          pkg-config --static --libs cairo
+          make -j"$(sysctl -n hw.ncpu)" NOOPT=true
+
+      - name: Check binaries are universal
+        run: |
+          set -e
+          status=0
+          for f in bin/*.component/Contents/MacOS/* bin/*.vst/Contents/MacOS/* bin/*.lv2/*.dylib; do
+            archs="$(lipo -archs "$f")"
+            echo "$f: $archs"
+            case " $archs " in
+              *" x86_64 "*) ;; *) status=1 ;;
+            esac
+            case " $archs " in
+              *" arm64 "*) ;; *) status=1 ;;
+            esac
+          done
+          exit $status
+
+      - name: Ad-hoc code signing
+        run: |
+          set -e
+          for b in bin/*.component bin/*.vst; do
+            codesign --force --deep --sign - "$b"
+          done
+          for f in bin/*.lv2/*.dylib; do
+            codesign --force --sign - "$f"
+          done
+
+      - name: Package
+        run: |
+          set -e
+          DIST=string-machine-macos-universal
+          rm -rf "$DIST" && mkdir -p "$DIST/AU" "$DIST/VST2" "$DIST/LV2"
+          cp -R bin/*.component "$DIST/AU/"
+          cp -R bin/*.vst "$DIST/VST2/"
+          cp -R bin/*.lv2 "$DIST/LV2/"
+          cat > "$DIST/INSTALL.txt" <<'TXT'
+          String machine - macOS Universal Binary (Intel x86_64 + Apple Silicon arm64)
+
+          Install by copying the bundles into:
+            AU   -> ~/Library/Audio/Plug-Ins/Components/
+            VST2 -> ~/Library/Audio/Plug-Ins/VST/
+            LV2  -> ~/Library/Audio/Plug-Ins/LV2/
+
+          These plugins are not notarized. If macOS blocks them, remove the
+          quarantine attribute after copying, for example:
+            xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/Components/string-machine*.component
+
+          Then restart your host (for AU, logging out/in or running
+          "killall -9 AudioComponentRegistrar" refreshes the AU cache).
+          TXT
+          ditto -c -k --sequesterRsrc --keepParent "$DIST" "$DIST.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: string-machine-macos-universal
+          path: string-machine-macos-universal.zip
+
+      - name: Validate Audio Units (auval)
+        run: |
+          set -e
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R bin/*.component ~/Library/Audio/Plug-Ins/Components/
+          killall -9 AudioComponentRegistrar 2>/dev/null || true
+          sleep 5
+          auval -a | grep -i Jpci || true
+          for arch in x86_64 arm64; do
+            # x86_64 runs through Rosetta 2 on Apple Silicon runners
+            if [ "$arch" = x86_64 ] && ! arch -x86_64 /usr/bin/true 2>/dev/null; then
+              echo "Rosetta 2 not available, skipping x86_64 validation"
+              continue
+            fi
+            arch -$arch auval -v aumu StM2 Jpci
+            arch -$arch auval -v aufx Strc Jpci
+            arch -$arch auval -v aufx StrC Jpci
+          done
+
+  release:
+    name: Publish release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: string-machine-macos-universal
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: string-machine-macos-universal.zip

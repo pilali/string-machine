@@ -53,7 +53,7 @@ uint32_t StringMachinePlugin::getVersion() const
 
 int64_t StringMachinePlugin::getUniqueId() const
 {
-    return d_cconst(DISTRHO_PLUGIN_UNIQUE_ID);
+    return d_cconst(STRINGIFY(DISTRHO_PLUGIN_UNIQUE_ID));
 }
 
 void StringMachinePlugin::initParameter(uint32_t index, Parameter &parameter)
