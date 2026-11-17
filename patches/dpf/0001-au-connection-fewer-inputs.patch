@@ -1,0 +1,42 @@
+From: string-machine maintainers
+Subject: [PATCH] AU: fix input connection when there are fewer inputs than outputs
+
+When an input is connected through kAudioUnitProperty_MakeConnection, the
+source unit was rendered into the internal buffer list, which holds
+max(inputs, outputs) buffers sized for the maximum block size. For plugins
+with fewer inputs than outputs (e.g. 1-in 2-out), the source rejects the
+buffer list with paramErr (-50), failing auval "connection semantics".
+
+Render the source into a buffer list with exactly one buffer per input and
+a byte size matching the frames to process, then restore the list.
+
+diff --git a/distrho/src/DistrhoPluginAU.cpp b/distrho/src/DistrhoPluginAU.cpp
+index 919faa71..4a71212a 100644
+--- a/distrho/src/DistrhoPluginAU.cpp
++++ b/distrho/src/DistrhoPluginAU.cpp
+@@ -1934,6 +1934,14 @@ public:
+        #if DISTRHO_PLUGIN_NUM_INPUTS != 0
+         if (fInputConnectionUnit != nullptr)
+         {
++            // the source unit renders into a buffer list matching its own output format,
++            // which has as many buffers as we have inputs (fewer than outputs is possible)
++            const UInt32 prevNumberBuffers = fAudioBufferList->mNumberBuffers;
++            const UInt32 prevDataByteSize = fAudioBufferList->mBuffers[0].mDataByteSize;
++            fAudioBufferList->mNumberBuffers = numInputs;
++            for (uint16_t i = 0; i < numInputs; ++i)
++                fAudioBufferList->mBuffers[i].mDataByteSize = sizeof(float) * inFramesToProcess;
++
+             AudioUnitRenderActionFlags ioActionFlags = 0;
+             const OSStatus err = AudioUnitRender(fInputConnectionUnit,
+                                                  &ioActionFlags,
+@@ -1942,6 +1950,10 @@ public:
+                                                  inFramesToProcess,
+                                                  fAudioBufferList);
+ 
++            fAudioBufferList->mNumberBuffers = prevNumberBuffers;
++            for (uint16_t i = 0; i < prevNumberBuffers; ++i)
++                fAudioBufferList->mBuffers[i].mDataByteSize = prevDataByteSize;
++
+             if (err != noErr)
+             {
+                 setLastRenderError(err);

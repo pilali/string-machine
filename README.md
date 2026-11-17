@@ -50,6 +50,7 @@ The resulting `string-machine-macos-universal.zip` is available as a workflow ar
 To build locally on a Mac:
 
 ```
+for p in patches/dpf/*.patch; do git -C dpf apply "../$p"; done
 scripts/build-macos-deps.sh deps/prefix
 export ARCH_FLAGS="-arch x86_64 -arch arm64 -mmacosx-version-min=10.15"
 export CFLAGS="$ARCH_FLAGS -I$PWD/deps/prefix/include" CXXFLAGS="$ARCH_FLAGS -I$PWD/deps/prefix/include"
@@ -57,6 +58,8 @@ export LDFLAGS="$ARCH_FLAGS -framework CoreFoundation -framework CoreGraphics -f
 export PKG_CONFIG="pkg-config --static" PKG_CONFIG_PATH="$PWD/deps/prefix/lib/pkgconfig"
 make NOOPT=true
 ```
+
+The patches in `patches/dpf` fix issues of the upstream DPF Audio Unit wrapper and must be applied before building.
 
 The binaries are ad-hoc signed but not notarized: after copying them to `~/Library/Audio/Plug-Ins/Components`, you may need to run `xattr -dr com.apple.quarantine` on the bundles.
 

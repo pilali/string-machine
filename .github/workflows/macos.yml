@@ -24,6 +24,14 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Apply DPF patches
+        run: |
+          set -e
+          for p in patches/dpf/*.patch; do
+            echo "Applying $p"
+            git -C dpf apply "../$p"
+          done
+
       - name: Install build tools
         run: brew install pkgconf || true
 
